@@ -1,2 +1,2 @@
-# cavia-auth
+# Cavia Auth
 Cavia auth module
