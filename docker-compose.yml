@@ -1,0 +1,29 @@
+version: '3.7'
+
+volumes:
+  db_data:
+      driver: local
+
+services:
+  db:
+      image: postgres:11-alpine
+      volumes:
+        - db_data:/var/lib/postgres
+      environment:
+        POSTGRES_DB: keycloak
+        POSTGRES_USER: keycloak
+        POSTGRES_PASSWORD: password
+  keycloak:
+      image: jboss/keycloak:6.0.1
+      environment:
+        DB_VENDOR: postgres
+        DB_ADDR: db
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_PASSWORD: password
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: moreno
+      ports:
+        - 8080:8080
+      depends_on:
+        - db
