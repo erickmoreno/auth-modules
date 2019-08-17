@@ -13,8 +13,8 @@ services:
         POSTGRES_DB: keycloak
         POSTGRES_USER: keycloak
         POSTGRES_PASSWORD: password
-  keycloak:
-      image: cavia-auth
+  auth:
+      image: docker.pkg.github.com/erickmoreno/cavia-auth/cavia-auth:0.0.1
       environment:
         DB_VENDOR: postgres
         DB_ADDR: db
