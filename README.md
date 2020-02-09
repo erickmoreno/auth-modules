@@ -2,7 +2,7 @@
 
 This is a reference project that packages my go to solutions to secure web/cloud projects
 
-### Related projects
+## Related projects
 
 [Keycloak](https://www.keycloak.org)
 
@@ -10,11 +10,8 @@ This is a reference project that packages my go to solutions to secure web/cloud
 
 ## Usage
 
-docker-compose -p 8080:8080 up -d
+docker-compose up -d
 
 Go to: localhost:8080/auth
 
 ## To publish a new image
-
-docker tag <IMAGE ID> docker.pkg.github.com/erickmoreno/cavia-auth/cavia-auth:<IMAGE TAG>
-docker push docker.pkg.github.com/erickmoreno/cavia-auth/cavia-auth:<IMAGE TAG>

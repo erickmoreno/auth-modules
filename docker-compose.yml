@@ -6,7 +6,7 @@ volumes:
 
 services:
   db:
-      image: postgres:11-alpine
+      image: postgres:12-alpine
       volumes:
         - db_data:/var/lib/postgresql/data
       environment:
@@ -14,7 +14,7 @@ services:
         POSTGRES_USER: keycloak
         POSTGRES_PASSWORD: password
   auth:
-      image: docker.pkg.github.com/erickmoreno/cavia-auth/cavia-auth:0.0.1
+      build: .
       environment:
         DB_VENDOR: postgres
         DB_ADDR: db
@@ -22,8 +22,7 @@ services:
         DB_USER: keycloak
         DB_PASSWORD: password
         KEYCLOAK_USER: admin
-        KEYCLOAK_PASSWORD: moreno
-        KEYCLOAK_WELCOME_THEME: cavia
+        KEYCLOAK_PASSWORD: password
       ports:
         - 8080:8080
       depends_on:
