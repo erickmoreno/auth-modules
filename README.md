@@ -1,6 +1,6 @@
-# Cavia Auth
+# Authentication and authorization cloud solution
 
-Cavia auth module
+This is a reference project that packages my go to solutions to secure web/cloud projects
 
 ### Related projects
 
