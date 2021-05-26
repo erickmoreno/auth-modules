@@ -6,12 +6,56 @@ This is a reference project that packages my go to solutions to secure web/cloud
 
 [Keycloak](https://www.keycloak.org)
 
-[Keycloak Gatekeeper](https://www.keycloak.org/docs/latest/securing_apps/index.html#_keycloak_generic_adapter)
-
 ## Usage
 
 docker-compose up -d
 
 Go to: localhost:8080/auth
 
-## To publish a new image
+## Realm ADMIN
+
+### Get access token
+
+```
+  export ACCESS_TOKEN=`curl \
+  -d "client_id=admin-cli" \
+  -d "username=admin" \
+  -d "password=password" \
+  -d "grant_type=password" \
+  "http://localhost:8080/auth/realms/master/protocol/openid-connect/token" | jq -r '.access_token'`
+```
+
+### Find out if realm _test_ exists
+
+```
+  curl -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  "http://localhost:8080/auth/admin/realms/test"
+```
+
+### Create realm
+
+```bash
+  curl -v -X POST \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @realm.json \
+  "http://localhost:8080/auth/admin/realms"
+```
+
+### Find out if Realm _test_ was created
+
+```bash
+  curl -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  "http://localhost:8080/auth/admin/realms/test"
+```
+
+### Delete realm
+
+```bash
+  curl -v -X DELETE \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  "http://localhost:8080/auth/admin/realms/test"
+```
